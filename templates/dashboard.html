@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block events %}
+    <script src='/static/js/locales/ru.js'></script>
+    <script>
+
+    str = "{{ events }}".replaceAll('&quot;', '"');
+    console.log(str);
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                locale: 'ru',
+                events: JSON.parse(str),
+                initialView: 'dayGridMonth'
+            });
+            calendar.render();
+            calendar.updateSize();
+         });
+    </script>
+{% endblock %}
+
+{% block content %}
+    <h1 class="uk-card-title" style="text-align: center">Добро пожаловать!</h1>
+    <h3 class="uk-card-title" style="text-align: center">Ваш профиль:</h3>
+
+    <p class="uk-card-title" style="text-align: center ">Логин: {{ user.username }}</p>
+    <p class="uk-card-title" style="text-align: center ">Почта: {{ user.email }}</p>
+    <p class="uk-card-title" style="text-align: center ">Имя: {{ user.first_name }}</p>
+    <p class="uk-card-title" style="text-align: center ">Фамилия: {{ user.last_name }}</p>
+    <p class="uk-card-title" style="text-align: center ">Код подразделения: {{ profile.sub_code }}</p>
+    <p class="uk-card-title" style="text-align: center ">Должность: {{ profile.position }}</p>
+
+{% endblock %}

@@ -1,0 +1,7 @@
+version: '3.7'
+
+services:
+  sber:
+    build: .
+    ports:
+      - '5005:8000'
